@@ -1,1 +1,4 @@
 # ViteRbi
+
+library(ViteRbi)
+ViteRbi()
