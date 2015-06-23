@@ -1,5 +1,7 @@
 # ViteRbi
 
+Example basic usage:
+
 ```R
 library(ViteRbi)
 ViteRbi()
