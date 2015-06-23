@@ -1,0 +1,11 @@
+Package: ViteRbi
+Type: Package
+Title: R implementation of the viterbi algorithm
+Version: 1.0
+Date: 2011-03-05
+Author: Tomas William Fitzgerald
+Maintainer: <tf2@sanger.ac.uk>
+Depends:
+Description: Viterbi Algorithm for general searches
+License: Artistic
+Packaged: 2012-01-31 01:17:36 UTC; tf2
