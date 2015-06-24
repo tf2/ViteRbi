@@ -10,7 +10,7 @@ Or if really feeling interested in this change detection method, install CNsolid
 
 ```R
 testData <- function(n = 2000, m = 0.001, s = 0.2, p = 0.2) {
-	d = syn.genome(data.frame(1,n,m,s,testproportion))$data
+	d = syn.genome(data.frame(1,n,m,s,p))$data
 	d[,3] = d[,4]
 return(d)
 }
