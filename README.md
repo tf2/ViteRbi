@@ -6,6 +6,12 @@ Example basic usage:
 library(ViteRbi)
 ViteRbi()
 ```
+And to get back the cnv call locations:
+```R
+extract_calls(ViteRbi())
+```
+
+
 Or if really feeling interested in this change detection method, install CNsolidate and try:
 
 ```R
