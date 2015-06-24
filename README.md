@@ -6,7 +6,7 @@ Example basic usage:
 library(ViteRbi)
 ViteRbi()
 ```
-And to get back the cnv call locations:
+And to get back the cnv call locations (note: normal state is defined as 1, deletion state 0, and duplication state 2):
 ```R
 extract_calls(ViteRbi())
 ```
