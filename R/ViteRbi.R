@@ -28,28 +28,34 @@ ViteRbi <- function(data=NULL, states=c(-1,0,1), normalstate=1, emiss = c(-1, 1,
 	invisible(jumpy)
 }
 
-extract_calls <- function(jumpy) {
-	u = unique(jumpy[,4])
-	cnv_calls = NULL
-	start_index = 1
-	start_chr = jumpy[start_index,1]
-	start_start = jumpy[start_index,2]
-	start_state = jumpy[start_index,4]
-	for(x in 2:length(jumpy[,1])) {
-		if(jumpy[x,4]!=start_state) {
-			call = data.frame(start_chr, start_start, jumpy[x-1,2], start_state, mean(jumpy[start_index:(x-1), 3]), length(jumpy[start_index:(x-1), 3]))
-			colnames(call) = c("chr", "start", "stop", "state", "mean_lr2", "number_probes")
-			cnv_calls = rbind(cnv_calls, call)
-			start_chr = jumpy[x,1]
-			start_start = jumpy[x,2]
-			start_state = jumpy[x,4]
-			start_index = x
+extract_calls <- function(data) {
+	all_cnv_calls = NULL
+	u = unique(data[,1])
+	for(z in 1:length(u)) {
+		cnv_calls = NULL
+		jumpy = data[data[,1]==u[z],]
+		start_index = 1
+		start_chr = u[z]
+		start_start = jumpy[start_index,2]
+		start_state = jumpy[start_index,4]
+		for(x in 2:length(jumpy[,1])) {
+			if(jumpy[x,4]!=start_state) {
+				call = data.frame(start_chr, start_start, jumpy[x-1,2], start_state, mean(jumpy[start_index:(x-1), 3]), length(jumpy[start_index:(x-1), 3]))
+				colnames(call) = c("chr", "start", "stop", "state", "mean_lr2", "number_probes")
+				cnv_calls = rbind(cnv_calls, call)
+				start_chr = jumpy[x,1]
+				start_start = jumpy[x,2]
+				start_state = jumpy[x,4]
+				start_index = x
+			}
+			if(x==length(jumpy[,1])) {
+				call = data.frame(start_chr, start_start, jumpy[x,2], start_state, mean(jumpy[start_index:x, 3]), length(jumpy[start_index:x, 3]))
+				colnames(call) = c("chr", "start", "stop", "state", "mean_lr2", "number_probes")
+				cnv_calls = rbind(cnv_calls, call)
+			}
 		}
-		if(x==length(jumpy[,1])) {
-			call = data.frame(start_chr, start_start, jumpy[x,2], start_state, mean(jumpy[start_index:x, 3]), length(jumpy[start_index:x, 3]))
-			colnames(call) = c("chr", "start", "stop", "state", "mean_lr2", "number_probes")
-			cnv_calls = rbind(cnv_calls, call)
-		}
+		all_cnv_calls = rbind(all_cnv_calls, cnv_calls)
+		print(z)
 	}
-return(cnv_calls)
+return(all_cnv_calls)
 }
