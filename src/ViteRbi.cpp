@@ -77,9 +77,10 @@ vector<double> viterbi(hmm h, vector<double> d, vector<double> s) {
 return s;        
 }
 	
-vector<double> viterbi_fixed(hmm h, vector<double> d, vector<double> s, double *ep; double *tp ) {        
+vector<double> viterbi_fixed(hmm h, vector<double> d, vector<double> s) {        
 	int i, j; int N = (int)h.d_nsts; 
 	int **fwds = new int*[N]; int **bwds = new int*[N]; 
+	double **ep = h.d_emsp; double **tp = h.d_trsp[c];
 	//vector < double** > rrr = ets(h); double **ep = rrr[0]; double **tp = rrr[1];
     for(i=0;i<N;++i) { fwds[i] = new int[d.size()]; bwds[i] = new int[d.size()]; }
     for(i=0;i<N;i++) { fwds[i][0] = log(npdf(ep[i][0], ep[i][1], d[0])); }  
