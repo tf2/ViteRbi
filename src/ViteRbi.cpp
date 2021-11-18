@@ -124,11 +124,11 @@ void ViteRbi(double *data, double *states, double *emissions, double *transition
 	}
 }
 
-void ViteRbi_fixed(double *data, double *states, double *emissions, double *transitions, int *dN, int *sN, int *eN, int *tN, double *ep; double *tp) {
+void ViteRbi_fixed(double *data, double *states, double *emissions, double *transitions, int *dN, int *sN, int *eN, int *tN) {
 	vector < double > d = nord(data, (int)*dN);
 	vector < double > s; for(int i=0;i<(int)*dN;i++) { s.push_back(states[i]); }
 	hmm h((int)*sN, (int)*eN, (int)*tN, emissions, transitions);
-	vector< double > r = viterbi_fixed(h, d, s, ep, tp);
+	vector< double > r = viterbi_fixed(h, d, s);
 	for(int i=0;i<(int)*dN;i++) {
 		states[i]=r[i];
 	}
